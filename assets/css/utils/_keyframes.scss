@@ -1,0 +1,16 @@
+@keyframes afterFilter {
+  0%{
+    opacity: 0;
+    transform: rotate(0deg) scale(0.8);
+  }
+
+  90%{
+    opacity: 1;
+    transform: rotate(80deg) scale(1);
+  }
+
+  100%{
+    opacity: 1;
+    transform: rotate(90deg) scale(1);
+  }
+}

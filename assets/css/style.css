@@ -1,0 +1,216 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+@keyframes afterFilter {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.8);
+  }
+  90% {
+    opacity: 1;
+    transform: rotate(80deg) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(90deg) scale(1);
+  }
+}
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+
+main {
+  padding: 0 100px;
+  margin-bottom: 100px;
+}
+main .search__containerBar {
+  position: relative;
+}
+main .search__containerBar__bar {
+  width: 100%;
+  height: 70px;
+  background-color: #E7E7E7;
+  padding: 25px;
+  border: none;
+  font-family: "Lato", sans-serif;
+  font-size: 1.8rem;
+  border-radius: 5px;
+}
+main .search__containerBar__bar::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+main .search__containerBar::after {
+  content: "\f002";
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  font-size: 2.4rem;
+  transform: translateY(-50%);
+}
+main .search__containerFilter {
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+}
+main .search__containerFilter__filter {
+  color: white;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  width: 170px;
+  height: 70px;
+}
+main .search__containerFilter__filter#filterIngredients {
+  background-color: #3282F7;
+}
+main .search__containerFilter__filter#filterIngredients li::after {
+  color: #3282F7;
+}
+main .search__containerFilter__filter#filterAppareils {
+  background-color: #68D9A4;
+}
+main .search__containerFilter__filter#filterAppareils li::after {
+  color: #68D9A4;
+}
+main .search__containerFilter__filter#filterUstentiles {
+  background-color: #ED6454;
+}
+main .search__containerFilter__filter#filterUstentiles li::after {
+  color: #ED6454;
+}
+main .search__containerFilter__filter label {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 25px 15px;
+}
+main .search__containerFilter__filter label:hover > ul {
+  display: block;
+}
+main .search__containerFilter__filter ul {
+  display: none;
+  padding: 0 15px 15px 15px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+main .search__containerFilter__filter ul li {
+  flex-basis: 33.3%;
+  margin-top: 5px;
+  font-weight: 400;
+  transition: 0.2s;
+  cursor: pointer;
+  display: flex;
+  height: 25px;
+  align-items: center;
+}
+main .search__containerFilter__filter ul li:hover {
+  font-weight: 700;
+}
+main .search__containerFilter__filter ul li:hover::after {
+  content: "+";
+  margin-left: 5px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 100%;
+  color: black;
+  font-size: 20px;
+  animation: afterFilter 0.3s forwards;
+}
+main .search__containerFilter__filter:hover {
+  height: auto;
+  width: 30%;
+  transition: 0.3s;
+}
+main .search__containerFilter__filter:hover ul {
+  display: flex;
+}
+main .recettes {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8%;
+  row-gap: 50px;
+}
+main .recettes__card {
+  height: 364px;
+  width: 28%;
+  min-width: 365px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+main .recettes__card__illu {
+  width: 100%;
+  height: 178px;
+  background-color: #C7BEBE;
+}
+main .recettes__card__text {
+  background-color: #E7E7E7;
+  padding: 20px;
+  height: 100%;
+}
+main .recettes__card__text__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .recettes__card__text__top h2 {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 22px;
+  color: black;
+}
+main .recettes__card__text__top span {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Lato";
+}
+main .recettes__card__text__top span i {
+  font-size: 2rem;
+}
+main .recettes__card__text__bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+main .recettes__card__text__bottom ul {
+  width: 50%;
+}
+main .recettes__card__text__bottom ul li {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 14px;
+}
+main .recettes__card__text__bottom p {
+  width: 50%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+/*# sourceMappingURL=style.css.map */
