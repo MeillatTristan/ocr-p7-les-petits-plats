@@ -1,3 +1,3 @@
-import AllRecipes from "../factories/AllRecipes";
+import AllRecipes from '../factories/AllRecipes.js'
 
 new AllRecipes;

@@ -75,24 +75,43 @@ main .search__containerFilter__filter {
   font-size: 1.8rem;
   width: 170px;
   height: 70px;
+  position: relative;
 }
 main .search__containerFilter__filter#filterIngredients {
   background-color: #3282F7;
 }
-main .search__containerFilter__filter#filterIngredients li::after {
+main .search__containerFilter__filter#filterIngredients ul {
+  background-color: #3282F7;
+}
+main .search__containerFilter__filter#filterIngredients ul li::after {
   color: #3282F7;
+}
+main .search__containerFilter__filter#filterIngredients ul li:hover {
+  background-color: #2f75df;
 }
 main .search__containerFilter__filter#filterAppareils {
   background-color: #68D9A4;
 }
-main .search__containerFilter__filter#filterAppareils li::after {
+main .search__containerFilter__filter#filterAppareils ul {
+  background-color: #68D9A4;
+}
+main .search__containerFilter__filter#filterAppareils ul li::after {
   color: #68D9A4;
+}
+main .search__containerFilter__filter#filterAppareils ul li:hover {
+  background-color: #67c498;
 }
 main .search__containerFilter__filter#filterUstentiles {
   background-color: #ED6454;
 }
-main .search__containerFilter__filter#filterUstentiles li::after {
+main .search__containerFilter__filter#filterUstentiles ul {
+  background-color: #ED6454;
+}
+main .search__containerFilter__filter#filterUstentiles ul li::after {
   color: #ED6454;
+}
+main .search__containerFilter__filter#filterUstentiles ul li:hover {
+  background-color: #d35648;
 }
 main .search__containerFilter__filter label {
   display: flex;
@@ -103,11 +122,15 @@ main .search__containerFilter__filter label {
 main .search__containerFilter__filter label:hover > ul {
   display: block;
 }
+main .search__containerFilter__filter label .inputFiltre {
+  display: none;
+}
 main .search__containerFilter__filter ul {
   display: none;
   padding: 0 15px 15px 15px;
   justify-content: space-between;
   flex-wrap: wrap;
+  border-radius: 0 0 5px 5px;
 }
 main .search__containerFilter__filter ul li {
   flex-basis: 33.3%;
@@ -116,8 +139,11 @@ main .search__containerFilter__filter ul li {
   transition: 0.2s;
   cursor: pointer;
   display: flex;
-  height: 25px;
+  height: 39px;
   align-items: center;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 main .search__containerFilter__filter ul li:hover {
   font-weight: 700;
@@ -135,13 +161,93 @@ main .search__containerFilter__filter ul li:hover::after {
   font-size: 20px;
   animation: afterFilter 0.3s forwards;
 }
-main .search__containerFilter__filter:hover {
+main .search__containerFilter__filter.active {
   height: auto;
-  width: 30%;
+  width: 40%;
   transition: 0.3s;
+  border-radius: 5px 5px 0 0;
 }
-main .search__containerFilter__filter:hover ul {
+main .search__containerFilter__filter.active ul {
   display: flex;
+  position: absolute;
+  width: 100%;
+}
+main .search__containerFilter__filter.active .title {
+  display: none;
+}
+main .search__containerFilter__filter.active .inputFiltre {
+  display: block;
+  color: white;
+  border: none;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  background-color: transparent;
+  width: 100%;
+}
+main .search__containerFilter__filter.active .inputFiltre::placeholder {
+  color: white;
+  opacity: 0.65;
+}
+main .search__containerFilter__filter.active .inputFiltre:focus {
+  outline: none;
+}
+main .search__containerTags {
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  gap: 20px;
+  flex-wrap: wrap;
+  min-height: 85px;
+  transition: 0.3s all ease-in-out;
+}
+main .search__containerTags__tag {
+  font-weight: 400;
+  transition: 0.2s;
+  cursor: pointer;
+  display: flex;
+  height: 45px;
+  align-items: center;
+  font-size: 2rem;
+  padding: 1.5rem 2rem;
+  border-radius: 5px;
+  color: white;
+}
+main .search__containerTags__tag.ingredients {
+  background-color: #3282F7;
+}
+main .search__containerTags__tag.appareils {
+  background-color: #68D9A4;
+}
+main .search__containerTags__tag.ustentiles {
+  background-color: #ED6454;
+}
+main .search__containerTags__tag::after {
+  content: "\f00d";
+  font-family: "Font Awesome 6 Pro";
+  margin-left: 10px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: white;
+  border-radius: 100%;
+  font-size: 20px;
+  font-weight: 900;
+  border: solid 3px white;
+}
+main .search__containerTags__tag:hover.ingredients {
+  background-color: #2f75df;
+}
+main .search__containerTags__tag:hover.appareils {
+  background-color: #67c498;
+}
+main .search__containerTags__tag:hover.ustentiles {
+  background-color: #d35648;
 }
 main .recettes {
   margin-top: 25px;
@@ -150,6 +256,12 @@ main .recettes {
   justify-content: center;
   gap: 8%;
   row-gap: 50px;
+}
+main .recettes .error {
+  font-size: 2rem;
+  color: #918989;
+  margin-top: 20px;
+  font-weight: 600;
 }
 main .recettes__card {
   height: 364px;

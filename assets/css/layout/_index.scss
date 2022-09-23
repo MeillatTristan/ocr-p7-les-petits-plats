@@ -51,29 +51,53 @@ main{
         font-size: 1.8rem;
         width: 170px;
         height: 70px;
+        position: relative;
         
 
         &#filterIngredients{
           background-color: $blue;
 
-          li::after{
-            color: $blue;
+          ul{
+            background-color: $blue;
+            li::after{
+              color: $blue;
+            }
+  
+            li:hover{
+              background-color: #2f75df;
+            }
           }
         }
 
         &#filterAppareils{
           background-color: $green;
 
-          li::after{
-            color: $green;
+          ul{
+            background-color: $green;
+
+            li::after{
+              color: $green;
+            }
+  
+            li:hover{
+              background-color: #67c498;
+            }
           }
         }
 
         &#filterUstentiles{
           background-color: $red;
 
-          li::after{
-            color: $red;
+          ul{
+            background-color: $red;
+
+            li::after{
+              color: $red;
+            }
+  
+            li:hover{
+              background-color: #d35648;
+            }
           }
         }
 
@@ -88,6 +112,10 @@ main{
               display: block;
             }
           }
+
+          .inputFiltre{
+            display: none;
+          }
         }
         
         ul{
@@ -95,6 +123,7 @@ main{
           padding: 0 15px 15px 15px;
           justify-content: space-between;
           flex-wrap: wrap;
+          border-radius: 0 0 5px 5px;
 
           li{
             flex-basis: 33.3%;
@@ -103,11 +132,15 @@ main{
             transition: 0.2s;
             cursor: pointer;
             display: flex;
-            height: 25px;
+            height: 39px;
             align-items: center;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
 
             &:hover{
               font-weight: 700;
+              
 
               &::after{
                 content: "+";
@@ -126,17 +159,112 @@ main{
           }
         }
   
-        &:hover{
+        &.active{
           height: auto;
-          width: 30%;
+          width: 40%;
           transition: 0.3s;
+          border-radius: 5px 5px 0 0;
 
           ul{
             display: flex;
+            position: absolute;
+            width: 100%;
+
+          }
+
+          .title{
+            display: none;
+          }
+
+          .inputFiltre{
+            display: block;
+            color: white;
+            border: none;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 22px;
+            background-color: transparent;
+            width: 100%;
+            
+            &::placeholder{
+              color: white;
+              opacity: 0.65;
+            }
+
+            &:focus{
+              outline: none;
+            }
           }
         }
       }
+    }
 
+    &__containerTags{
+      display: flex;
+      width: 100%;
+      padding: 20px 0;
+      gap: 20px;
+      flex-wrap: wrap;
+      min-height: 85px;
+      transition: 0.3s all ease-in-out;
+
+      &__tag{
+        font-weight: 400;
+        transition: 0.2s;
+        cursor: pointer;
+        display: flex;
+        height: 45px;
+        align-items: center;
+        font-size: 2rem;
+        padding: 1.5rem 2rem;
+        border-radius: 5px;
+        color: white;
+
+        &.ingredients{
+          background-color: $blue;
+        }
+
+        &.appareils{
+          background-color: $green;
+        }
+
+        &.ustentiles{
+          background-color: $red;
+        }
+
+        &::after{
+          content: "\f00d";
+          font-family: "Font Awesome 6 Pro";
+          margin-left: 10px;
+          width: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: transparent;
+          color: white;
+          border-radius: 100%;
+          font-size: 20px;
+          font-weight: 900;
+          border: solid 3px white;
+        }
+
+        &:hover{
+          &.ingredients{
+            background-color: #2f75df;
+          }
+  
+          &.appareils{
+            background-color: #67c498;
+          }
+  
+          &.ustentiles{
+            background-color: #d35648;
+          }
+        }
+      }
     }
   }
 
@@ -147,6 +275,13 @@ main{
     justify-content: center;
     gap: 8%;
     row-gap: 50px;
+
+    .error{
+      font-size: 2rem;
+      color: $grey90;
+      margin-top: 20px;
+      font-weight: 600;
+    }
 
     &__card{
       height: 364px;
