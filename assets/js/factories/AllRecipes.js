@@ -378,6 +378,7 @@ export default class AllRecipes {
       checkArray = this.dataActive;
       this.dataActive = [];
     }
+    console.log(checkArray)
     searchString = searchString.toLowerCase().replace(/\./g, '');
     checkArray.forEach(element => {
       element.ingredients.forEach(ingredient => {
