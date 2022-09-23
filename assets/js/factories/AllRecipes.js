@@ -67,7 +67,8 @@ export default class AllRecipes {
     if (data.length <= 0) {
       containerRecipes.innerHTML = '<p class="error"> Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc';
     }
-    data.forEach(recipe => {
+    for (let i = 0; i < data.length; i++) {
+      const recipe = data[i];
       const card = document.createElement('div')
       card.classList.add('recettes__card')
 
@@ -96,7 +97,8 @@ export default class AllRecipes {
 
       const listIngredient = document.createElement('ul')
 
-      recipe.ingredients.forEach(ingredient => {
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ingredient = recipe.ingredients[j];
         const liIngredient = document.createElement('li')
         let stringIngrdient = "";
         if (ingredient.quantity) {
@@ -110,7 +112,7 @@ export default class AllRecipes {
         }
         liIngredient.innerHTML = stringIngrdient;
         listIngredient.appendChild(liIngredient)
-      })
+      }
 
       const description = document.createElement('p')
       description.textContent = this.truncateText(recipe.description, 175)
@@ -124,7 +126,7 @@ export default class AllRecipes {
       card.appendChild(text)
 
       containerRecipes.appendChild(card)
-    })
+    }
   }
 
   truncateText(text, length) {
@@ -140,31 +142,36 @@ export default class AllRecipes {
     this.filters.appareils = [];
     this.filters.ustentiles = [];
 
-    data.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
+    for (let i = 0; i < data.length; i++) {
+      const recipe = data[i];
+
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ingredient = recipe.ingredients[j];
         if (!this.filters.ingredients.includes(ingredient.ingredient.toLowerCase().replace(/\./g, ''))) {
           this.filters.ingredients.push(ingredient.ingredient.toLowerCase().replace(/\./g, ''))
         }
-      })
+      }
 
       if (!this.filters.appareils.includes(recipe.appliance.replace(/\./g, '').toLowerCase())) {
         this.filters.appareils.push(recipe.appliance.replace(/\./g, '').toLowerCase())
       }
 
-      recipe.ustensils.forEach(ustentil => {
+      for (let j = 0; j < recipe.ustensils.length; j++) {
+        const ustentil = recipe.ustensils[j];
         if (!this.filters.ustentiles.includes(ustentil.toLowerCase().replace(/\./g, '').toLowerCase())) {
           this.filters.ustentiles.push(ustentil.toLowerCase().replace(/\./g, '').toLowerCase())
         }
-      })
-    })
+      }
+    }
   }
 
   addFilters(data) {
     const ingredientList = document.getElementById('ingredientsList');
     ingredientList.innerHTML = "";
 
-    data.ingredients.forEach(ingredient => {
-      const li = document.createElement('li')
+    for (let i = 0; i < data.ingredients.length; i++) {
+      const ingredient = data.ingredients[i];
+      let li = document.createElement('li')
       li.textContent = this.truncateText(ingredient, 16)
       li.addEventListener('click', (e) => {
         if (!this.tagsActive.ingredients.find(element => element == e.target.textContent)) {
@@ -173,13 +180,14 @@ export default class AllRecipes {
       })
 
       ingredientList.appendChild(li)
-    })
+    }
 
     const appareilList = document.getElementById('appareilsList');
     appareilList.innerHTML = "";
 
-    data.appareils.forEach(appareil => {
-      const li = document.createElement('li')
+    for (let i = 0; i < data.appareils.length; i++) {
+      const appareil = data.appareils[i];
+      let li = document.createElement('li')
       li.textContent = this.truncateText(appareil, 16)
 
       li.addEventListener('click', (e) => {
@@ -189,13 +197,13 @@ export default class AllRecipes {
       })
 
       appareilList.appendChild(li)
-    })
-
+    }
     const ustentileList = document.getElementById('ustentilesList');
     ustentileList.innerHTML = "";
 
-    data.ustentiles.forEach(ustentile => {
-      const li = document.createElement('li')
+    for (let i = 0; i < data.ustentiles.length; i++) {
+      const ustentile = data.ustentiles[i];
+      let li = document.createElement('li')
       li.textContent = this.truncateText(ustentile, 16)
 
       li.addEventListener('click', (e) => {
@@ -205,7 +213,7 @@ export default class AllRecipes {
       })
 
       ustentileList.appendChild(li)
-    })
+    }
   }
 
   addTags(e, type) {
@@ -281,13 +289,15 @@ export default class AllRecipes {
   searchFilterScript(array, searchString) {
     searchString = searchString.toLowerCase().replace(/\./g, '');
     let dataActive = [];
-    array.forEach(element => {
+    for (let i = 0; i < array.length; i++) {
+      const element = array[i];
       if (element.toLowerCase().replace(/\./g, '').includes(searchString)) {
         if (!dataActive.includes(element)) {
           dataActive.push(element);
         }
       }
-    });
+    }
+
     return dataActive;
   }
 
@@ -321,40 +331,53 @@ export default class AllRecipes {
       checkArray = this.searchArray(document.getElementById('search-bar').value);
       this.dataActive = [];
     }
-    checkArray.forEach(element => { //parcourt chaque recette
+
+    for (let i = 0; i < checkArray.length; i++) {
+      const element = checkArray[i];
       checkIngredient = 0
       counterIngredient = 0;
-      element.ingredients.forEach(ingredient => { //parcourt chaque ingredient de la recette
-        this.tagsActive.ingredients.forEach(tag => {
+
+      for (let j = 0; j < element.ingredients.length; j++) {
+        const ingredient = element.ingredients[j];
+
+        for (let k = 0; k < this.tagsActive.ingredients.length; k++) {
+          const tag = this.tagsActive.ingredients[k];
           if (ingredient.ingredient.toLowerCase().replace(/\./g, '').includes(tag.replace('…', ''))) {
             counterIngredient += 1;
           }
-        });
-      })
+        }
+      }
       if(this.tagsActive.ingredients.length === counterIngredient){ 
         checkIngredient = 1
       }
 
       checkUstentile = 0
       counterUstentile = 0
-      element.ustensils.forEach(ustensil => {
-        this.tagsActive.ustentiles.forEach(tag => {
+
+      for (let j = 0; j < element.ustensils.length; j++) {
+        const ustensil = element.ustensils[j];
+        for (let k = 0; k < this.tagsActive.ustentiles.length; k++) {
+          const tag = this.tagsActive.ustentiles[k];
           if (ustensil.toLowerCase().replace(/\./g, '').includes(tag)) {
             counterUstentile += 1;
           }
-        });
-      });
+        }
+      }
+
       if(this.tagsActive.ustentiles.length === counterUstentile){ 
         checkUstentile = 1
       }
 
       checkAppareil = 0
       counterAppareil = 0
-      this.tagsActive.appareils.forEach(tag => {
+
+      for (let k = 0; k < this.tagsActive.appareils.length; k++) {
+        const tag = this.tagsActive.appareils[k];
         if (element.appliance.toLowerCase().replace(/\./g, '').includes(tag)) {
           counterAppareil += 1;
         }
-      });
+      }
+
       if(this.tagsActive.appareils.length === counterAppareil){ 
         checkAppareil = 1
       }
@@ -364,7 +387,8 @@ export default class AllRecipes {
           this.dataActive.push(element);
         }
       }
-    })
+    }
+
     this.listFilters(this.dataActive);
     this.addFilters(this.filters);
     return (this.dataActive);
@@ -379,21 +403,28 @@ export default class AllRecipes {
       this.dataActive = [];
     }
     searchString = searchString.toLowerCase().replace(/\./g, '');
-    checkArray.forEach(element => {
-      element.ingredients.forEach(ingredient => {
+
+    for (let i = 0; i < checkArray.length; i++) {
+      const element = checkArray[i];
+
+      for (let j = 0; j < element.ingredients.length; j++) {
+        const ingredient = element.ingredients[j];
         if (ingredient.ingredient.toLowerCase().replace(/\./g, '').includes(searchString)) {
           if (!this.dataActive.includes(element)) {
             this.dataActive.push(element);
           }
         }
-      });
-      element.ustensils.forEach(ustensil => {
+      }
+
+      for (let j = 0; j < element.ustensils.length; j++) {
+        const ustensil = element.ustensils[j];
         if (ustensil.toLowerCase().replace(/\./g, '').includes(searchString)) {
           if (!this.dataActive.includes(element)) {
             this.dataActive.push(element);
           }
         }
-      });
+      }
+
       if (element.name.toLowerCase().replace(/\./g, '').includes(searchString)) {
         if (!this.dataActive.includes(element)) {
           this.dataActive.push(element);
@@ -411,7 +442,8 @@ export default class AllRecipes {
           this.dataActive.push(element);
         }
       }
-    });
+    }
+
     return (this.dataActive);
 
   }
