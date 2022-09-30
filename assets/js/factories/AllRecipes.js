@@ -252,8 +252,8 @@ export default class AllRecipes {
       this.listFilters(dataReturn);
       this.addFilters(this.filters);
       this.displayData(dataReturn);
-    } else if (this.tagsActive.length > 0){
-      this.searchTags();
+    } else if (this.tagsActive.ingredients.length  +  this.tagsActive.ustentiles.length + this.tagsActive.appareils.length > 0){
+      this.displayData(this.searchTags());
     } else {
       this.listFilters(this.data);
       this.addFilters(this.filters);
@@ -331,7 +331,7 @@ export default class AllRecipes {
       checkArray = this.searchArray(document.getElementById('search-bar').value);
       this.dataActive = [];
     }
-
+    console.log(checkArray)
     for (let i = 0; i < checkArray.length; i++) {
       const element = checkArray[i];
       checkIngredient = 0
@@ -396,7 +396,7 @@ export default class AllRecipes {
 
   searchArray(searchString) {
     let checkArray;
-    if (this.dataActive.length === 0) {
+    if (this.tagsActive.ingredients.length  +  this.tagsActive.ustentiles.length + this.tagsActive.appareils.length <= 0) {
       checkArray = this.data;
     } else {
       checkArray = this.dataActive;
