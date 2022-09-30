@@ -237,15 +237,15 @@ export default class AllRecipes {
    * 
    * @param {Event} e 
    */
-  searchBar(e) {
+   searchBar(e) {
     const searchValue = e.target.value;
     if (searchValue.length >= 3) {
       const dataReturn = this.searchArray(searchValue);
       this.listFilters(dataReturn);
       this.addFilters(this.filters);
       this.displayData(dataReturn);
-    } else if (this.tagsActive.length > 0){
-      this.searchTags();
+    } else if (this.tagsActive.ingredients.length  +  this.tagsActive.ustentiles.length + this.tagsActive.appareils.length > 0){
+      this.displayData(this.searchTags());
     } else {
       this.listFilters(this.data);
       this.addFilters(this.filters);
@@ -309,6 +309,7 @@ export default class AllRecipes {
       return this.data;
     } else if (this.tagsActive.ingredients.length  +  this.tagsActive.ustentiles.length + this.tagsActive.appareils.length === 0 && document.getElementById('search-bar').value.length >= 3){
       this.dataActive = [];
+      
       let array = this.searchArray(document.getElementById('search-bar').value);
       this.listFilters(array);
       this.addFilters(this.filters);
@@ -317,8 +318,8 @@ export default class AllRecipes {
       this.dataActive = [];
       checkArray = this.data;
     } else { // if tags not empty and searchbar > 3 
-      this.dataActive = [];
       checkArray = this.searchArray(document.getElementById('search-bar').value);
+      console.log(checkArray)
       this.dataActive = [];
     }
     checkArray.forEach(element => { //parcourt chaque recette
@@ -372,10 +373,12 @@ export default class AllRecipes {
 
   searchArray(searchString) {
     let checkArray;
-    if (this.dataActive.length === 0) {
+    if (this.tagsActive.ingredients.length  +  this.tagsActive.ustentiles.length + this.tagsActive.appareils.length === 0) {
       checkArray = this.data;
+      this.dataActive = [];
     } else {
       checkArray = this.dataActive;
+      console.log('yo')
       this.dataActive = [];
     }
     console.log(checkArray)
